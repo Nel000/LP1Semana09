@@ -34,12 +34,17 @@ namespace AnimInterf
                     $"Animal {i + 1} {animals[i].Sound()}");
 
                 if (animals[i] is IMammal)
+                {
                     Console.WriteLine(
-                        $"- has nipples");
+                        $"--- has {((IMammal)animals[i]).NumberOfNipples} nipples");
+                }
                 
                 if (animals[i] is ICanFly)
+                {
                     Console.WriteLine(
-                        $"- has wings");
+                        $"--- has {((ICanFly)animals[i]).NumberOfWings} wings");
+                }
+                    
             }
         }
     }
