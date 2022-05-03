@@ -21,7 +21,6 @@ namespace PlayerManager1
 
             do 
             {
-                // Show options
                 Console.WriteLine("Options");
                 Console.WriteLine("-(I)nsert new player");
                 Console.WriteLine("-(L)ist all players");
@@ -46,7 +45,14 @@ namespace PlayerManager1
                         Console.WriteLine();
                         break;
                     case "L":
+                        for (int i = 0; i < players.Count; i++)
+                        {
+                            Console.WriteLine($"Player #{i + 1}");
+                            Console.WriteLine($"-Name: {players[i].Name}");
+                            Console.WriteLine($"-Score: {players[i].Score}");
+                        }
 
+                        Console.WriteLine();
                         break;
                     case "S":
 
