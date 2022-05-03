@@ -52,14 +52,11 @@ namespace PlayerManager2
                         Console.Write("Insert value: ");
                         minScore = Convert.ToInt32(Console.ReadLine());
 
-                        List<Player> playersS = 
+                        IEnumerable<Player> playersS = 
                             GetPlayersWithScoreGreaterThan(minScore);
 
-                        if (playersS.Count == 0)
-                            Console.WriteLine(
-                                $"No player has score greater than {minScore}");
-                        else
-                            PrintPlayerList(playersS);
+                        PrintPlayerList(playersS);
+
                         Console.WriteLine();
                         break;
                     case "E":
@@ -73,27 +70,26 @@ namespace PlayerManager2
             while (!hasEnded);
         }
 
-        private static List<Player> GetPlayersWithScoreGreaterThan(int s)
+        private static IEnumerable<Player> GetPlayersWithScoreGreaterThan(int s)
         {
-            List<Player> playersWithScoreGreaterThan = 
-                new List<Player>();
-
             foreach(Player player in players)
             {
                 if (player.Score > s)
-                    playersWithScoreGreaterThan.Add(player);
+                    yield return player;
             }
-
-            return playersWithScoreGreaterThan;
         }
 
-        private static void PrintPlayerList(List<Player> pList)
+        private static void PrintPlayerList(IEnumerable<Player> pList)
         {
-            for (int i = 0; i < pList.Count; i++)
+            int i = 0;
+
+            foreach (Player player in pList)
             {
                 Console.WriteLine($"Player #{i + 1}");
-                Console.WriteLine($"-Name: {pList[i].Name}");
-                Console.WriteLine($"-Score: {pList[i].Score}");
+                Console.WriteLine($"-Name: {player.Name}");
+                Console.WriteLine($"-Score: {player.Score}");
+
+                i++;
             }
         }
     }
