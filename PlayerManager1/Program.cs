@@ -45,12 +45,7 @@ namespace PlayerManager1
                         Console.WriteLine();
                         break;
                     case "L":
-                        for (int i = 0; i < players.Count; i++)
-                        {
-                            Console.WriteLine($"Player #{i + 1}");
-                            Console.WriteLine($"-Name: {players[i].Name}");
-                            Console.WriteLine($"-Score: {players[i].Score}");
-                        }
+                        PrintPlayerList(players);
                         Console.WriteLine();
                         break;
                     case "S":
@@ -63,12 +58,8 @@ namespace PlayerManager1
                         if (playersS.Count == 0)
                             Console.WriteLine(
                                 $"No player has score greater than {minScore}");
-                        for (int i = 0; i < playersS.Count; i++)
-                        {
-                            Console.WriteLine($"Player #{i + 1}");
-                            Console.WriteLine($"-Name: {playersS[i].Name}");
-                            Console.WriteLine($"-Score: {playersS[i].Score}");
-                        }
+                        else
+                            PrintPlayerList(playersS);
                         Console.WriteLine();
                         break;
                     case "E":
@@ -94,6 +85,16 @@ namespace PlayerManager1
             }
 
             return playersWithScoreGreaterThan;
+        }
+
+        private static void PrintPlayerList(List<Player> pList)
+        {
+            for (int i = 0; i < pList.Count; i++)
+            {
+                Console.WriteLine($"Player #{i + 1}");
+                Console.WriteLine($"-Name: {pList[i].Name}");
+                Console.WriteLine($"-Score: {pList[i].Score}");
+            }
         }
     }
 }
