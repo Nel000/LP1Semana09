@@ -5,19 +5,19 @@ namespace PlayerManager1
 {
     class Program
     {
+        private static List<Player> players = new List<Player>() 
+        {
+            new Player("João", 10),
+            new Player("José", 15)
+        };
+
         static void Main(string[] args)
         {
             bool hasEnded = false;
 
             string option = "";
-            string currentPlayerName = "";
-            int currentPlayerScore;
-
-            List<Player> players = new List<Player>() 
-            {
-                new Player("João", 10),
-                new Player("José", 15)
-            };
+            string currPlayerName = "";
+            int currPlayerScore, minScore;
 
             do 
             {
@@ -34,13 +34,13 @@ namespace PlayerManager1
                 {
                     case "I":
                         Console.Write("Insert new player name: ");
-                        currentPlayerName = Console.ReadLine();
+                        currPlayerName = Console.ReadLine();
 
                         Console.Write("Insert new player score: ");
-                        currentPlayerScore = Convert.ToInt32(Console.ReadLine());
+                        currPlayerScore = Convert.ToInt32(Console.ReadLine());
 
                         players.Add(
-                            new Player(currentPlayerName, currentPlayerScore));
+                            new Player(currPlayerName, currPlayerScore));
 
                         Console.WriteLine();
                         break;
@@ -51,11 +51,25 @@ namespace PlayerManager1
                             Console.WriteLine($"-Name: {players[i].Name}");
                             Console.WriteLine($"-Score: {players[i].Score}");
                         }
-
                         Console.WriteLine();
                         break;
                     case "S":
+                        Console.Write("Insert value: ");
+                        minScore = Convert.ToInt32(Console.ReadLine());
 
+                        List<Player> playersS = 
+                            GetPlayersWithScoreGreaterThan(minScore);
+
+                        if (playersS.Count == 0)
+                            Console.WriteLine(
+                                $"No player has score greater than {minScore}");
+                        for (int i = 0; i < playersS.Count; i++)
+                        {
+                            Console.WriteLine($"Player #{i + 1}");
+                            Console.WriteLine($"-Name: {playersS[i].Name}");
+                            Console.WriteLine($"-Score: {playersS[i].Score}");
+                        }
+                        Console.WriteLine();
                         break;
                     case "E":
                         hasEnded = true;
@@ -66,6 +80,20 @@ namespace PlayerManager1
                 }
             }
             while (!hasEnded);
+        }
+
+        private static List<Player> GetPlayersWithScoreGreaterThan(int s)
+        {
+            List<Player> playersWithScoreGreaterThan = 
+                new List<Player>();
+
+            foreach(Player player in players)
+            {
+                if (player.Score > s)
+                    playersWithScoreGreaterThan.Add(player);
+            }
+
+            return playersWithScoreGreaterThan;
         }
     }
 }
