@@ -19,6 +19,11 @@ namespace PlayerManager2
             string currPlayerName = "";
             int currPlayerScore, minScore;
 
+            Console.WriteLine("******************");
+            Console.WriteLine("* PLAYER MANAGER *");
+            Console.WriteLine("******************");
+            Console.WriteLine();
+
             do 
             {
                 Console.WriteLine("Options");
